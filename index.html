@@ -31,6 +31,14 @@
             height: 100%;
         }
 
+        #size {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 50px;
+            color: white;
+        }
+
         .dimmer, .text {
             position: absolute;
             top: 0;
@@ -58,7 +66,7 @@
         #text {
             color: rgb(255, 255, 255);
             font-size: 500px;
-            font-family: "Optician Sans",sans-serif;
+            font-family: "Optician Sans", sans-serif;
         }
     </style>
 </head>
@@ -69,17 +77,20 @@
         <div id="text">E</div>
     </div>
 </div>
+<div id="size">500</div>
 
 <script>
     const element = document.getElementById('text');
     let fontSize = 500; // initial font size in pixels
 
+    const sizeElement = document.getElementById("size");
     document.getElementsByClassName("container")[ 0 ].addEventListener('wheel', event => {
         event.preventDefault();
         const direction = event.deltaY < 0 ? 4 : -4; // determine scroll direction
         const intensity = Math.abs(event.deltaY) / 100; // determine scroll intensity
         fontSize += direction * intensity; // adjust font size based on direction and intensity
         element.style.fontSize = fontSize + 'px'; // update font size style
+        sizeElement.innerHTML = Math.round(fontSize) + "";
     });
 </script>
 </body>
