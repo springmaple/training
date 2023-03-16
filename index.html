@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Training</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        @font-face {
+            font-family: 'Optician Sans';
+            src: url('fonts/Optician-Sans.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-image: url("bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(60%);
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .dimmer, .text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .dimmer {
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(0, 0, 0, 0.2)
+        }
+
+        .text {
+            z-index: 2;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #text {
+            color: rgb(255, 255, 255);
+            font-size: 500px;
+            font-family: "Optician Sans",sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="dimmer"></div>
+    <div class="text">
+        <div id="text">E</div>
+    </div>
+</div>
+
+<script>
+    const element = document.getElementById('text');
+    let fontSize = 500; // initial font size in pixels
+
+    document.getElementsByClassName("container")[ 0 ].addEventListener('wheel', event => {
+        event.preventDefault();
+        const direction = event.deltaY < 0 ? 4 : -4; // determine scroll direction
+        const intensity = Math.abs(event.deltaY) / 100; // determine scroll intensity
+        fontSize += direction * intensity; // adjust font size based on direction and intensity
+        element.style.fontSize = fontSize + 'px'; // update font size style
+    });
+</script>
+</body>
+</html>
